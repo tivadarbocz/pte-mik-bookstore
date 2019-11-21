@@ -27,8 +27,8 @@
 		</tr>
 		<tr th:each="book : ${books}">
 			<td th:text="${book.id}"></td>
-			<td th:text="${book.isbn}"></td>
 			<td><a th:href="@{'/books/' + ${book.id}}" th:text="${book.title}"></a></td>
+			<td th:text="${book.isbn}"></td>
 			<td><a th:href="@{'/books/' + ${book.id} + '/delete'}" ><i class="fa fa-trash" style="color:#009933; text-align: center;" aria-hidden="true"></i></a></td>
 		</tr>
 		</tbody>
