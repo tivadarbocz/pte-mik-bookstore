@@ -1,9 +1,9 @@
 package com.uni.bookstore.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+//import lombok.Getter;
+//import lombok.Setter;
+
+import javax.persistence.*;
 
 //@Getter
 //@Setter
@@ -17,6 +17,10 @@ public class Book extends BaseEntity {
 
 	@Column(nullable = false)
 	private String title;
+
+	@OneToOne
+	@JoinColumn(name = "author_id", referencedColumnName = "id")
+	private Author author;
 
 	public String getIsbn() {
 		return isbn;
@@ -32,5 +36,13 @@ public class Book extends BaseEntity {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public Author getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(Author author) {
+		this.author = author;
 	}
 }

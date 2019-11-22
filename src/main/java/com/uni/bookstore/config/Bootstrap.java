@@ -1,7 +1,9 @@
 package com.uni.bookstore.config;
 
 import com.thedeanda.lorem.LoremIpsum;
+import com.uni.bookstore.model.Author;
 import com.uni.bookstore.model.Book;
+import com.uni.bookstore.service.AuthorService;
 import com.uni.bookstore.service.BookService;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -18,9 +20,11 @@ import java.util.UUID;
 public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
 	private final BookService bookService;
+	private final AuthorService authorService;
 
-	public Bootstrap(BookService bookService) {
+	public Bootstrap(BookService bookService, AuthorService authorService) {
 		this.bookService = bookService;
+		this.authorService = authorService;
 	}
 
 	@Override
@@ -36,6 +40,11 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 				Book book = new Book();
 				book.setIsbn(UUID.randomUUID().toString().substring(0, 13));
 				book.setTitle(LoremIpsum.getInstance().getTitle(2, 6));
+				Author author = new Author();
+				author.setName(LoremIpsum.getInstance().getName());
+				authorService.save(author);
+
+				book.setAuthor(author);
 				books.add(book);
 			}
 
