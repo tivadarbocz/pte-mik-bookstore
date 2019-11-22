@@ -1,12 +1,12 @@
 package com.uni.bookstore.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
-import javax.persistence.*;
-
-@Getter
-@Setter
+//@Getter
+//@Setter
 @Entity
 @SequenceGenerator(name = "default_gen", sequenceName = "book_seq", allocationSize = 1)
 @Table(name = "books", schema = "public")
@@ -18,4 +18,19 @@ public class Book extends BaseEntity {
 	@Column(nullable = false)
 	private String title;
 
+	public String getIsbn() {
+		return isbn;
+	}
+
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 }
